@@ -41,8 +41,10 @@ const RecordModal = ({ startRecording, toggleRecordModal, recordModalIsOpen }) =
 	    <a className='quitProfile' onClick={ toggleRecordModal }>&#x2715;</a>
       <p><input id='recordModalInput' style={ recordModalStyle }/></p>
       <div className='startCall' onClick={() => {
-        var title = document.getElementById('recordModalInput').value
+        var title = document.getElementById('recordModalInput').value;
+
         startRecording(title);
+
         toggleRecordModal();
       }}>
         <p>Start Recording</p>

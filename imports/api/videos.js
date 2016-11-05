@@ -7,6 +7,7 @@ Videos.allow({
     update: function (userId, doc, fieldNames, modifier) {
            return true;
         },
+
 });
 
 export { Videos };
