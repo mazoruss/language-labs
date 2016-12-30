@@ -10,5 +10,4 @@ const UserEntry = ({user, profilePopup}) => {
   );
 };
 
-
 export default UserEntry;

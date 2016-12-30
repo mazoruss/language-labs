@@ -32,7 +32,7 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     background            : '#5fa9d9',
     color                 : '#fff',
-  }
+  },
 };
 
 var Troll = () => {
@@ -43,16 +43,16 @@ var Troll = () => {
   var troll2 = null;
 
   troll.start = () => {
-    if (online) {return;}
+    if (online) { return; }
     troll1 = setInterval(() => {
       document.getElementById('theirVideo').style.filter = 'invert(1)'
-    }, 57)
+    }, 57);
     troll2 = setInterval(() => {
       document.getElementById('theirVideo').style.filter = 'invert(0)'
-    }, 83)
+    }, 83);
     document.getElementById('myVideo').muted = 'false';
     online = true;
-  }
+  };
 
   troll.end = () => {
     clearInterval(troll1);
@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     var troll = new Troll();
-    const user = Meteor.users.findOne({_id: Meteor.userId()});
+    const user = Meteor.users.findOne({ _id: Meteor.userId() });
 
     this.state = {
       localStream: false,
@@ -94,8 +94,8 @@ class Dashboard extends React.Component {
     };
     this.blobSize = 1 * 1024 * 1024;
     props.peer.on('call', this.receiveCall.bind(this));
-    Meteor.users.update({_id: Meteor.userId()}, {
-      $set: { 'profile.peerId': props.peer.id }
+    Meteor.users.update({ _id: Meteor.userId() }, {
+      $set: { 'profile.peerId': props.peer.id },
     });
 
     document.onkeydown = this.keyPress.bind(this);
@@ -126,7 +126,7 @@ class Dashboard extends React.Component {
   }
 
   receiveCall(incomingCall) {
-    if (this.state.localStream) {return;}
+    if (this.state.localStream) { return; }
     let user = Meteor.users.findOne({ 'profile.peerId': incomingCall.peer});
     this.setState({ gotCall: true, incomingCall: incomingCall, incomingCaller: user, flash: user.profile.flash});
   }
@@ -203,7 +203,7 @@ class Dashboard extends React.Component {
     });
     this.toggleLoading(false);
     clearInterval(this.state.flash);
-    this.setState({ 
+    this.setState({
       localStream: false,
       currentCall: false,
       callDone: true,
@@ -216,10 +216,10 @@ class Dashboard extends React.Component {
       flash: false,
     });
     this.props.peer.on('call', this.receiveCall.bind(this));
-  }  
+  }
 
   playVideo(url) {
-    if (this.state.localStream) {return;}
+    if (this.state.localStream) { return; }
     this.closeModal();
     document.getElementById('theirVideo').src = url;
   }
@@ -320,9 +320,9 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className='dashboard'>
+      <div className="dashboard">
         <div className='top'>
-          <VideoBox 
+          <VideoBox
             callDone={this.state.callDone}
             callLoading={this.state.callLoading}
             currentCall={this.state.currentCall}

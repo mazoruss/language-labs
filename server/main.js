@@ -23,9 +23,9 @@ Meteor.startup(() => {
     bucket: 'languagedotnext',
     acl: 'public-read',
     key: () => {
-      let counter = Videos.findOne({userId: 'counter'}).counter;
+      let counter = Videos.findOne({ userId: 'counter' }).counter;
       counter++;
-      Videos.update({userId: 'counter'}, {$set: {'counter': counter}});
+      Videos.update({ userId: 'counter' }, { $set: { counter } });
       return String(counter);
     },
   });
@@ -36,9 +36,9 @@ Meteor.startup(() => {
 
   Meteor.publish('users', () => Meteor.users.find({}));
 
-  Meteor.publish('videos', function() {
-    if (Videos.findOne({userId: 'counter'}) === undefined){
-      Videos.insert({userId: 'counter', counter: 0});
+  Meteor.publish('videos', () => {
+    if (Videos.findOne({ userId: 'counter' }) === undefined) {
+      Videos.insert({ userId: 'counter', counter: 0 });
     }
     return Videos.find({});
   });
@@ -48,7 +48,7 @@ Meteor.startup(() => {
   Meteor.methods({
     updateRating({ newReviews, _id }) {
       Meteor.users.update(_id,
-        { $set: 
+        { $set:
           { reviews: newReviews },
         }
       );
@@ -81,6 +81,6 @@ Meteor.startup(() => {
       } catch (e) {
         return false;
       }
-    }
+    },
   });
 });
